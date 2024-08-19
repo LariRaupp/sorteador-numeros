@@ -1,4 +1,7 @@
 function sortear(){
+    if (!validarEntrada()) {
+        return; 
+      }
     let quantidadeNumeros = parseInt(document.getElementById('quantidade').value);
     let numeroMin = parseInt(document.getElementById('de').value);
     let numeroMax = parseInt(document.getElementById('ate').value);
@@ -45,3 +48,29 @@ function alterarBotao(){
         botao.classList.add('container__botao-desabilitado'); 
     }
 }
+
+function validarEntrada() {
+    let quantidadeNumeros = document.getElementById('quantidade').value;
+    let numeroMin = document.getElementById('de').value;
+    let numeroMax = document.getElementById('ate').value;
+  
+    if (quantidadeNumeros === '' || numeroMin === '' || numeroMax === '') {
+      alert('Por favor, preencha todos os campos!');
+      return false;
+    }
+
+    quantidadeNumeros = parseInt(quantidadeNumeros);
+    numeroMin = parseInt(numeroMin);
+    numeroMax = parseInt(numeroMax);
+    
+    if (numeroMin >= numeroMax) {
+      alert('O número mínimo deve ser menor que o número máximo!');
+      return false;
+    }
+
+    if (quantidadeNumeros > (numeroMax - numeroMin + 1)) {
+        alert('Campo "Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+        return;
+      }
+    return true;   
+  }
